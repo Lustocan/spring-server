@@ -1,0 +1,30 @@
+spring.application.name: lavoretti
+server:
+  port: 8080
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource.url: jdbc:postgres://localhost:5432/lavoretti
+  datasource.username: myuser
+  datasource.password: secret
+  jpa.properties.hibernate.format_sql: true
+  jpa.show-sql: true
+  jpa.hibernate.ddl-auto: create-drop
+  ## save date in UTC FORMAT so to bring it to italian time zone add 2 hours
+  jpa.properties.hibernate:
+    jdbc.time_zone: UTC
+    dialect: org.hibernate.dialect.MySQL8Dialect
+    format_sql: true
+jwt:
+  secret: dentalprofit234asdweedfrew1231412312e4123rsfdksdgfkldnslkdmsfklmlkdfdswefsgssdfewvsdbdfsgsdfsdsfcsew
+  expirationDateInMinutes: 60
+  refreshExpirationDateInMinutes: 70
+---
+spring:
+  config.activate.on-profile: prod
+  jpa.properties.hibernate.format_sql: false
+  jpa.show-sql: false
+  jpa.hibernate.ddl-auto: none
+
