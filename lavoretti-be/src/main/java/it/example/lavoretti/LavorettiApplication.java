@@ -1,0 +1,13 @@
+package it.example.lavoretti;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LavorettiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LavorettiApplication.class, args);
+	}
+
+}
