@@ -1,11 +1,11 @@
 package it.example.lavoretti.service;
 
-import it.example.lavoretti.dao.UserId;
 import it.example.lavoretti.domain.User;
 import it.example.lavoretti.exception.UserNotFoundException;
 import it.example.lavoretti.mapper.UserMapperComponent;
 import it.example.lavoretti.repository.UserRepository;
 import jakarta.annotation.Nonnull;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class UserService {
     }
 
     @Nonnull
-    public User findByUserId(@Nonnull UserId userId) {
+    public User findByUserId(@Nonnull UUID userId) {
         return userRepository.findById(userId)
                              .map(userMapperComponent::toDomain)
                              .orElseThrow(() -> new UserNotFoundException("User not found " + userId));
