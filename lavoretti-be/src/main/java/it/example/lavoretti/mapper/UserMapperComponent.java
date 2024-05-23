@@ -11,12 +11,12 @@ public class UserMapperComponent {
         return new UserEntity(user.username(),
                               user.email(),
                               user.password(),
-                              user.roleType());
+                              user.role());
     }
 
     public User toDomain(UserEntity userEntity) {
         return new User(userEntity.getId(),
-                        userEntity.getRoleType(),
+                        userEntity.getRole(),
                         userEntity.getPassword(),
                         userEntity.getUsername(),
                         userEntity.getEmail(),

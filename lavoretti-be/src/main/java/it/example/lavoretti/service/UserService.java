@@ -5,6 +5,7 @@ import it.example.lavoretti.exception.UserNotFoundException;
 import it.example.lavoretti.mapper.UserMapperComponent;
 import it.example.lavoretti.repository.UserRepository;
 import jakarta.annotation.Nonnull;
+
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,11 @@ public class UserService {
     private final UserMapperComponent userMapperComponent;
     private final UserRepository userRepository;
 
-    @Nonnull
     public User saveUser(@Nonnull User user) {
         var userEntity = userMapperComponent.toEntity(user);
+        if(userRepository.findByEmail(userEntity.getEmail())!=null||
+           userRepository.findByUsername(userEntity.getUsername())!=null) return null ;
+
         userRepository.save(userEntity);
         return userMapperComponent.toDomain(userEntity);
     }
