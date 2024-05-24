@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
 public class AuthController {
 
     @Autowired
@@ -19,10 +18,14 @@ public class AuthController {
         return ResponseEntity.ok("Hello, World!");
     }
 
-    @PostMapping("/signUp")
+    @PostMapping(path = "/signUp")
     public ResponseEntity<User> signUp(@RequestBody User user){
-        User currentUser = userService.saveUser(user);
-        if(currentUser==null) return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        return new ResponseEntity<>(currentUser, HttpStatus.CREATED);
+        System.out.println("ciao");
+
+       /* if(userService.findByUsername(user.username())!=null||
+           userService.findByEmail(user.email())!=null)
+           return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);*/
+
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 }

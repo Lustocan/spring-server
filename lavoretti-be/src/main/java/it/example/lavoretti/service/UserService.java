@@ -33,4 +33,14 @@ public class UserService {
                              .orElseThrow(() -> new UserNotFoundException("User not found " + userId));
     }
 
+
+    public User findByUsername(@Nonnull String username) {
+        return userRepository.findByUsername(username) ;
+    }
+
+
+    public User findByEmail(@Nonnull String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }

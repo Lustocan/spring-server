@@ -28,9 +28,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http.
+        return http.csrf(csfr -> csfr.disable()).
                authorizeHttpRequests((auth) -> auth.
-               requestMatchers("sign_up", "login", "greeting").permitAll().
+               requestMatchers("signUp", "login", "greeting").permitAll().
                requestMatchers("logout").authenticated()).
                sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
                authenticationProvider(authenticationProvider()).
