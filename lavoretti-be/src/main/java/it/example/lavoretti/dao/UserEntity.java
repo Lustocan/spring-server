@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.RandomStringUtils;
 
 @ToString(callSuper = true)
 @Setter
@@ -36,6 +37,9 @@ public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @Column
+    private String salt;
 
     @Column(nullable = false)
     private String username;
@@ -80,6 +84,19 @@ public class UserEntity extends BaseEntity {
         this.role = role;
         this.email = email;
         this.enabled = isEnabled;
+    }
+
+    public UserEntity(@Nonnull String username,
+                      @Nonnull String email,
+                      @Nonnull String password,
+                      @Nonnull String salt,
+                      @Nonnull String role) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.salt = salt;
     }
 }
 

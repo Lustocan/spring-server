@@ -11,6 +11,7 @@ public class UserMapperComponent {
         return new UserEntity(user.username(),
                               user.email(),
                               user.password(),
+                              user.salt(),
                               user.role());
     }
 
@@ -18,6 +19,7 @@ public class UserMapperComponent {
         return new User(userEntity.getId(),
                         userEntity.getRole(),
                         userEntity.getPassword(),
+                        userEntity.getSalt(),
                         userEntity.getUsername(),
                         userEntity.getEmail(),
                         userEntity.isAccountExpired(),
