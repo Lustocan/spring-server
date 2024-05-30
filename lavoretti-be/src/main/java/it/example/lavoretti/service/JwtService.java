@@ -19,8 +19,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtService {
-    // Our secret, everytime that the server it's restated or goes down, creates a new one
-    private String SECRET = RandomStringUtils.randomAlphanumeric(25);
+    // Our secret, everytime that the server it's restarted or goes down, creates a new one
+    private static String SECRET = RandomStringUtils.randomAlphanumeric(50);
 
     /* The Claim is a field contained into a Jwt, this method takes a String and
        a Function, we use this method for return useful data that refers to the claim requested.

@@ -30,8 +30,8 @@ public class SecurityConfig {
 
         return http.csrf(csfr -> csfr.disable()).
                authorizeHttpRequests((auth) -> auth.
-               requestMatchers("signUp", "login", "greeting").permitAll().
-               requestMatchers("logout").authenticated()).
+               requestMatchers("signUp", "login").permitAll().
+               requestMatchers("greeting").authenticated()).
                sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
                authenticationProvider(authenticationProvider()).
                addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).
