@@ -1,5 +1,6 @@
 package it.example.lavoretti.controller;
 
+import it.example.lavoretti.domain.RoleType;
 import it.example.lavoretti.helpers.PBDKF2Hashing;
 import it.example.lavoretti.dao.AuthRequest;
 import it.example.lavoretti.dao.UserEntity;

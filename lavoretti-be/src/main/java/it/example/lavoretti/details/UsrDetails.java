@@ -25,7 +25,7 @@ public class UsrDetails implements UserDetails {
         this.accountExpired = user.accountExpired();
         this.locked = user.locked();
         this.enabled = user.enabled();
-        this.authorities = Arrays.stream(user.role().split(",")).
+        this.authorities = Arrays.stream(user.role().name().split(",")).
                            map(SimpleGrantedAuthority::new).
                            collect(Collectors.toList());
     }

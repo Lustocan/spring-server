@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record User(@Nonnull UUID id,
-                   @Nonnull String role,
+                   @Nonnull RoleType role,
                    @Nonnull String password,
                    @Nonnull String salt,
                    @Nonnull String username,

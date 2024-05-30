@@ -33,7 +33,7 @@ public class UserEntity extends BaseEntity {
     private UUID id;
 
     @Column(nullable = false)
-    private String role;
+    private RoleType role;
 
     @Column(nullable = false)
     private String password;
@@ -65,7 +65,7 @@ public class UserEntity extends BaseEntity {
     public UserEntity(@Nonnull String username,
                       @Nonnull String email,
                       @Nonnull String password,
-                      @Nonnull String role) {
+                      @Nonnull RoleType role) {
         super();
         this.username = username;
         this.password = password;
@@ -76,7 +76,7 @@ public class UserEntity extends BaseEntity {
     public UserEntity(@Nonnull String username,
                       @Nonnull String email,
                       @Nonnull String password,
-                      @Nonnull String role,
+                      @Nonnull RoleType role,
                       boolean isEnabled) {
         super();
         this.username = username;
@@ -90,7 +90,7 @@ public class UserEntity extends BaseEntity {
                       @Nonnull String email,
                       @Nonnull String password,
                       @Nonnull String salt,
-                      @Nonnull String role) {
+                      @Nonnull RoleType role) {
         super();
         this.username = username;
         this.password = password;
