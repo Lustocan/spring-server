@@ -35,9 +35,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable).
-                   authorizeHttpRequests(auth -> auth.
-                       requestMatchers("/auth").permitAll().
-                       requestMatchers("greeting").authenticated()).
+                   authorizeHttpRequests(auth -> auth.requestMatchers("auth/**").permitAll()
+                                                     .anyRequest().authenticated()).
                    sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
                    authenticationProvider(authenticationProvider()).
                    addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).
