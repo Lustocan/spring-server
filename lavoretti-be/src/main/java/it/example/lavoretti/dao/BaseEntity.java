@@ -12,18 +12,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Data
 @MappedSuperclass
 public abstract class BaseEntity {
+
     @CreatedDate
     @Column(
         name = "created_at"
     )
-    private Instant createdAt;
+    protected Instant createdAt;
 
     @LastModifiedDate
     @Column(
         name = "updated_at"
     )
-    private Instant lastModified;
+    protected Instant lastModified;
 
     @Version
-    private Long version;
+    protected Long version;
 }
