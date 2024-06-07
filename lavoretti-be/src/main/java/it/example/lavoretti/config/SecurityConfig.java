@@ -28,6 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @ParametersAreNonnullByDefault
 public class SecurityConfig {
 
+    public static final String AUTH_URL = "auth/**";
     private final JwtAuthFilter authFilter;
     private final UserRepository userRepository;
     private final UserMapperComponent userMapperComponent;
@@ -35,7 +36,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable).
-                   authorizeHttpRequests(auth -> auth.requestMatchers("auth/**").permitAll()
+                   authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_URL).permitAll()
                                                      .anyRequest().authenticated()).
                    sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
                    authenticationProvider(authenticationProvider()).
