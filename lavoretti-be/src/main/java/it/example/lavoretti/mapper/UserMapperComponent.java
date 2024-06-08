@@ -2,7 +2,7 @@ package it.example.lavoretti.mapper;
 
 import static it.example.lavoretti.domain.users.RoleType.ROLE_USER;
 
-import it.example.lavoretti.dao.UserEntity;
+import it.example.lavoretti.dao.users.UserEntity;
 import it.example.lavoretti.domain.users.SignUpUser;
 import it.example.lavoretti.domain.users.User;
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -1,6 +1,6 @@
 package it.example.lavoretti.repository;
 
-import it.example.lavoretti.dao.UserEntity;
+import it.example.lavoretti.dao.users.UserEntity;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

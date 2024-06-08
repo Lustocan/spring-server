@@ -1,6 +1,7 @@
-package it.example.lavoretti.dao;
+package it.example.lavoretti.dao.users;
 
 
+import it.example.lavoretti.dao.BaseEntity;
 import it.example.lavoretti.domain.users.RoleType;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
