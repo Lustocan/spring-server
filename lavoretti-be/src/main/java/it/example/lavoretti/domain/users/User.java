@@ -1,21 +1,20 @@
-package it.example.lavoretti.domain;
+package it.example.lavoretti.domain.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nonnull;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 public record User(@Nonnull UUID id,
                    @Nonnull RoleType role,
                    @Nonnull String password,
-                   @Nonnull String salt,
+                   @JsonIgnore @Nonnull String salt,
                    @Nonnull String username,
                    @Nonnull String email,
                    boolean accountExpired,
                    boolean locked,
                    boolean credentialsExpired,
                    boolean enabled,
-                   @Nonnull LocalDateTime expiredAt) {
+                   @Nonnull Instant expiredAt) {
 
 }

@@ -1,10 +1,15 @@
 package it.example.lavoretti.mapper;
 
+import static it.example.lavoretti.domain.users.RoleType.ROLE_USER;
+
 import it.example.lavoretti.dao.UserEntity;
-import it.example.lavoretti.domain.User;
+import it.example.lavoretti.domain.users.SignUpUser;
+import it.example.lavoretti.domain.users.User;
+import javax.annotation.ParametersAreNonnullByDefault;
 import org.springframework.stereotype.Component;
 
 @Component
+@ParametersAreNonnullByDefault
 public class UserMapperComponent {
 
     public UserEntity toEntity(User user) {
@@ -29,4 +34,11 @@ public class UserMapperComponent {
                         userEntity.getExpiredAt());
     }
 
+    public UserEntity toEntity(SignUpUser signUpUser, String salt) {
+        return new UserEntity(signUpUser.username(),
+                              signUpUser.email(),
+                              signUpUser.password(),
+                              salt,
+                              ROLE_USER);
+    }
 }
