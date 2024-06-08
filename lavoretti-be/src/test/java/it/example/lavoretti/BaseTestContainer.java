@@ -14,7 +14,7 @@ import org.testcontainers.utility.DockerImageName;
 public abstract class BaseTestContainer {
 
     @LocalServerPort
-    private int port;
+    protected int port;
 
     /**
      * set the current port of the application to the RestAssured port
@@ -23,9 +23,9 @@ public abstract class BaseTestContainer {
         RestAssured.port = this.port;
     }
 
-    private static final PostgreSQLContainer postgresSQL = new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"))
+    private static final PostgreSQLContainer postgresSQL = new PostgreSQLContainer<>(DockerImageName.parse("postgres:alpine"))
         .withReuse(true)
-        .waitingFor(Wait.forLogMessage(".*Ready to accept connections.*\\n", 1));
+        .waitingFor(Wait.forLogMessage(".*ready to accept connections.*\\n", 1));
 
     @BeforeAll
     public static void startPostgresSQL() {

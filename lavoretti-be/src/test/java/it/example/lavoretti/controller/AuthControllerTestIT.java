@@ -1,9 +1,12 @@
 package it.example.lavoretti.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.restassured.RestAssured.given;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import it.example.lavoretti.BaseTestContainer;
 import it.example.lavoretti.LavorettiApplication;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,15 +15,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = LavorettiApplication.class)
-class LoginControllerTestIT extends BaseTestContainer {
+class AuthControllerTestIT extends BaseTestContainer {
+
+    public static final String BASE_AUTH_ENDPOINT = "/auth";
 
     @Test
     @DisplayName("test set up")
-    void test_set_up() {
+    void given_login_without_body_then_throw_exception() {
+        RestAssured.port = this.port;
         // given
-
-        // when
-        // then
-        assertThat("ok").isEqualTo("ok");
+        given()
+            .when()
+            .contentType(ContentType.JSON)
+            .post(BASE_AUTH_ENDPOINT + "/login")
+            .then()
+            .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 }
