@@ -1,6 +1,6 @@
 package it.example.lavoretti.service.users;
 
-import it.example.lavoretti.dao.UserEntity;
+import it.example.lavoretti.dao.users.UserEntity;
 import it.example.lavoretti.domain.auth.AuthRequest;
 import it.example.lavoretti.domain.auth.AuthResponse;
 import it.example.lavoretti.domain.users.SignUpUser;

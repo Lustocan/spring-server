@@ -6,6 +6,7 @@ import it.example.lavoretti.domain.users.SignUpUser;
 import it.example.lavoretti.domain.users.User;
 import it.example.lavoretti.service.users.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
+import javax.annotation.ParametersAreNonnullByDefault;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/auth")
+@ParametersAreNonnullByDefault
 public class AuthController {
 
     private final AuthService authService;
