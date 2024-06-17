@@ -42,6 +42,9 @@ public class AnnouncementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
+    @Column(nullable = false, name = "author_id")
+    private UUID authorId;
+
     @Column(nullable = false)
     private String description;
 
@@ -74,10 +77,11 @@ public class AnnouncementEntity {
         this.budget = budget;
     }
 
-    public AnnouncementEntity(CreateAnnouncement announcement) {
+    public AnnouncementEntity(CreateAnnouncement announcement, UUID authorId) {
         this.title = announcement.title();
         this.description = announcement.description();
         this.categoryAnnouncement = announcement.categoryAnnouncement();
         this.budget = announcement.budget();
+        this.authorId = authorId;
     }
 }

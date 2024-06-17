@@ -1,6 +1,6 @@
 package it.example.lavoretti.service.announcements;
 
-import it.example.lavoretti.domain.announcements.Announcement;
+import it.example.lavoretti.domain.announcements.CreateAnnouncement;
 import javax.annotation.ParametersAreNonnullByDefault;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @ParametersAreNonnullByDefault
 public class AnnouncementValidator {
 
-    public void validateAnnouncement(Announcement announcement) {
+    public void validateAnnouncement(CreateAnnouncement announcement) {
         if (announcement.budget().isPositive()) {
             throw new IllegalArgumentException("Announcement budget must be positive");
         }

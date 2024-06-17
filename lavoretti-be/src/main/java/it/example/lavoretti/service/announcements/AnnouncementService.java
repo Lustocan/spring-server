@@ -1,6 +1,7 @@
 package it.example.lavoretti.service.announcements;
 
 import it.example.lavoretti.domain.announcements.Announcement;
+import it.example.lavoretti.domain.announcements.CreateAnnouncement;
 import it.example.lavoretti.domain.offers.SelectOffer;
 import it.example.lavoretti.exception.AnnouncementNotFoundException;
 import it.example.lavoretti.mapper.AnnouncementMapper;
@@ -17,14 +18,16 @@ import org.springframework.data.domain.Pageable;
 @ParametersAreNonnullByDefault
 public class AnnouncementService {
 
+    public static final String ANNOUNCEMENT_NOT_FOUND = "Announcement not found";
+    public static final String OFFER_NOT_FOUND = "Offer not found";
     private final AnnouncementRepository announcementRepository;
     private final AnnouncementMapper announcementMapper;
     private final AnnouncementValidator announcementValidator;
     private final OfferRepository offerRepository;
 
-    public Announcement createAnnouncement(Announcement announcement) {
-        announcementValidator.validateAnnouncement(announcement);
-        var announcementEntity = announcementMapper.toEntity(announcement);
+    public Announcement createAnnouncement(CreateAnnouncement createAnnouncement) {
+        announcementValidator.validateAnnouncement(createAnnouncement);
+        var announcementEntity = announcementMapper.toEntity(createAnnouncement);
         var savedAnnouncementEntity = announcementRepository.save(announcementEntity);
         return announcementMapper.toDomain(savedAnnouncementEntity);
     }
@@ -38,15 +41,25 @@ public class AnnouncementService {
 
     public Announcement getAnnouncementById(UUID id) {
         var announcementEntity = announcementRepository.findById(id)
-                                                       .orElseThrow(() -> new AnnouncementNotFoundException("Announcement not found"));
+                                                       .orElseThrow(() -> new AnnouncementNotFoundException(ANNOUNCEMENT_NOT_FOUND));
         return announcementMapper.toDomain(announcementEntity);
     }
 
     public Announcement selectOffer(UUID id, SelectOffer selectOffer) {
         var announcementEntity = announcementRepository.findById(id)
-                                                       .orElseThrow(() -> new AnnouncementNotFoundException("Announcement not found"));
+                                                       .orElseThrow(() -> new AnnouncementNotFoundException(ANNOUNCEMENT_NOT_FOUND));
         var offerEntity = offerRepository.findById(selectOffer.selectedOfferId())
-                                         .orElseThrow(() -> new AnnouncementNotFoundException("Offer not found"));
+                                         .orElseThrow(() -> new AnnouncementNotFoundException(OFFER_NOT_FOUND));
+        announcementEntity.setSelectedOffer(offerEntity);
+        var savedAnnouncementEntity = announcementRepository.save(announcementEntity);
+        return announcementMapper.toDomain(savedAnnouncementEntity);
+    }
+
+    public Announcement rateAnnouncement(UUID id, SelectOffer selectOffer) {
+        var announcementEntity = announcementRepository.findById(id)
+                                                       .orElseThrow(() -> new AnnouncementNotFoundException(ANNOUNCEMENT_NOT_FOUND));
+        var offerEntity = offerRepository.findById(selectOffer.selectedOfferId())
+                                         .orElseThrow(() -> new AnnouncementNotFoundException(OFFER_NOT_FOUND));
         announcementEntity.setSelectedOffer(offerEntity);
         var savedAnnouncementEntity = announcementRepository.save(announcementEntity);
         return announcementMapper.toDomain(savedAnnouncementEntity);

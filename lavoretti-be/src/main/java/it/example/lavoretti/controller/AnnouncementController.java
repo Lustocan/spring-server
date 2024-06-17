@@ -1,6 +1,7 @@
 package it.example.lavoretti.controller;
 
 import it.example.lavoretti.domain.announcements.Announcement;
+import it.example.lavoretti.domain.announcements.CreateAnnouncement;
 import it.example.lavoretti.domain.offers.SelectOffer;
 import it.example.lavoretti.service.announcements.AnnouncementService;
 import java.util.UUID;
@@ -25,8 +26,8 @@ public class AnnouncementController {
     private final AnnouncementService announcementService;
 
     @PostMapping
-    public ResponseEntity<Announcement> createAnnouncement(@RequestBody Announcement announcement) {
-        Announcement createdAnnouncement = announcementService.createAnnouncement(announcement);
+    public ResponseEntity<Announcement> createAnnouncement(@RequestBody CreateAnnouncement createAnnouncement) {
+        Announcement createdAnnouncement = announcementService.createAnnouncement(createAnnouncement);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAnnouncement);
     }
 
@@ -43,9 +44,9 @@ public class AnnouncementController {
     }
 
     @PostMapping("/{id}/select-offer")
-    public ResponseEntity<Announcement> getAnnouncementById(@PathVariable UUID id, @RequestBody SelectOffer selectOffer) {
+    public ResponseEntity<Announcement> selectOffer(@PathVariable UUID id, @RequestBody SelectOffer selectOffer) {
         Announcement announcement = announcementService.selectOffer(id, selectOffer);
         return ResponseEntity.ok(announcement);
     }
-    
+
 }

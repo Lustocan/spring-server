@@ -2,6 +2,7 @@ package it.example.lavoretti.dao.users;
 
 
 import it.example.lavoretti.dao.BaseEntity;
+import it.example.lavoretti.dao.rating.RatingEntity;
 import it.example.lavoretti.domain.users.RoleType;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
@@ -11,8 +12,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -51,6 +55,12 @@ public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "ratedUser", orphanRemoval = true, fetch = jakarta.persistence.FetchType.LAZY)
+    private List<RatingEntity> receivedRatings = new ArrayList<>();
+
+    @Column(nullable = false, name = "rating")
+    private int rating = 0;
 
     @Column
     private boolean accountExpired = false;
@@ -102,6 +112,10 @@ public class UserEntity extends BaseEntity {
         this.role = role;
         this.email = email;
         this.salt = salt;
+    }
+
+    public void addNewRating(int rating) {
+        this.rating = (this.rating + rating) / 2;
     }
 }
 
